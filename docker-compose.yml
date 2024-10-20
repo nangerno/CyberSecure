@@ -1,0 +1,48 @@
+version: '3'
+services:
+  neo-db:
+    image: neo4j:5-community-bullseye
+    container_name: neo4j-container
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    networks:
+      - neo_mitre_network
+    env_file:
+      - .env 
+    volumes:
+      - neo4j_data:/data  # Mount a volume for Neo4j data
+      - neo4j_log:/logs  # Mount a volume for Neo4j logs
+    healthcheck:
+      test: wget http://localhost:7474 || exit 1
+      interval: 1s
+      timeout: 10s
+      retries: 20
+      start_period: 3s
+  web:
+    build:
+      context: .
+    image: neomitre:0.02
+    container_name: web-container
+    env_file:
+      - .env 
+    ports:
+      - '${DJANGO_PORT}:8000'
+    depends_on:
+      neo-db:
+        condition: service_healthy
+    networks:
+      - neo_mitre_network
+    command: ["bash", "-c", "python manage.py makemigrations &&
+                             python manage.py migrate && 
+                             python manage.py createsuperuser --no-input || true && 
+                             python manage.py runserver 0.0.0.0:8000 "]
+    restart: on-failure 
+
+networks:
+  neo_mitre_network:
+    driver: bridge
+volumes:
+  neo4j_data:
+  neo4j_log:
+

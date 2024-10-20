@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+
+
+    <title>{% block thistitle %}NEO4J For MITRE ATT&CK Visualization{% endblock %}</title>   
+    <link rel="stylesheet" href="{% static 'neograph/css/style.css' %}">
+    <script src="https://d3js.org/d3.v7.min.js"></script>     
+    <script src="{% static 'neograph/js/search_mitre.js' %}"></script>
+
+</head>
+
+<body>
+{% block content %}  
+    <div style="position: absolute; top: 20px; left: 20px;">
+        <div class="title">{{title}}</div>
+        <input type="text" id="searchInput" placeholder="Search by keywords">   
+        <button onclick="searchNode({{groupIcons|safe}})">Search</button>              
+        <p>
+        <div>           
+            {% for icon_type, icon_path in groupIcons.items %}
+                <div class="icon-container">
+                    <img src="{{ icon_path }}" alt="{{ icon_type }}">
+                    {{ icon_type }}
+                </div> <br>
+            {% endfor %}           
+        </div>
+    </div>                    
+{% endblock %}
+</body>
+</html>

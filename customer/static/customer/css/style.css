@@ -1,0 +1,76 @@
+
+html, body {
+    background-color: #22252a!important;
+    color: #8a8d93!important;
+    margin: 20;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.logout-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #555;
+}
+.side-menu {
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    height: 100vh;
+    padding-top: 20px;
+}
+
+.menu-item {
+    padding: 15px;
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.menu-item:hover {
+    background-color: #555;
+}
+
+.content {
+    padding: 20px;
+    flex: 1;
+}
+
+.side-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+
+.menu-item {
+    /* your menu item styles */
+
+    /* move Admin and Logout to the right */
+    margin-left: auto;
+}
+
+h4 {
+    border: 2px solid #4e0cea; /* You can adjust the border color and width */
+    padding: 10px; /* Optional: Add some padding inside the border */
+}
